@@ -78,9 +78,7 @@ public class GameController {
     private void doRound() {
         while (true) {
             Driver.MOVE oppMove = opponent.getMove(moveList);
-            //
-            System.out.println("Opponent will play: " + oppMove.toString());
-            //
+            if (Driver.DEBUG) System.out.println("Opponent will play: " + oppMove.toString());
             Driver.MOVE playerMove = getChoice();
 
             System.out.println("Opponent played: " + oppMove.toString());
@@ -88,7 +86,10 @@ public class GameController {
 
             moveList.remove(2);
             moveList.add(0, playerMove);
-            opponent.processOutcome(oppMove, playerMove);
+            if (!Driver.DEBUG) {
+                opponent.processOutcome(oppMove, playerMove);
+            }
+
 
             Driver.OUTCOME outcome = Driver.outcome(playerMove, oppMove);
 

@@ -8,6 +8,7 @@ public class Driver {
 
     // ------------------------------ VARIABLES ------------------------------ //
 
+    public static boolean DEBUG;
     private final static String introMessage =
             "******************************\n" +
                     "    Rock Paper Scissors AI    \n" +
@@ -46,6 +47,14 @@ public class Driver {
     public static void main(String[] args) {
 
         System.out.println(introMessage);
+
+        System.out.print("Debug?\n> ");
+        String input = in.nextLine();
+        if (input.equals("")) {
+            DEBUG = false;
+        } else {
+            DEBUG = true;
+        }
 
         CPU_TYPE opponentType = getCPUType();
         System.out.println("Playing opponent " + opponentType.toString() + "\n");
