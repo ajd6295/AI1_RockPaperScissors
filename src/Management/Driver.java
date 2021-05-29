@@ -14,7 +14,7 @@ public class Driver {
                     "    by Anthony DelPrincipe    \n" +
                     "******************************";
 
-    private static final Scanner in = new Scanner(System.in);
+    public static final Scanner in = new Scanner(System.in);
 
     public enum CPU_TYPE {
         CPU1,

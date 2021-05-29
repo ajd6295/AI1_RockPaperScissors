@@ -24,8 +24,8 @@ public interface Opponent {
     /**
      * processOutcome: Implementation dependent processing of outcome of round
      *
-     * @param oppMove       The move that the opponent (human) made
+     * @param playerMove       The move that the opponent (human) made
      */
-    public void processOutcome(Driver.MOVE oppMove);
+    public void processOutcome(Driver.MOVE playerMove);
 
 }

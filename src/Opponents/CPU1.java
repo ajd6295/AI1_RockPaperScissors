@@ -18,5 +18,5 @@ public class CPU1 implements Opponent {
     }
 
     @Override
-    public void processOutcome(Driver.MOVE oppMove) {}
+    public void processOutcome(Driver.MOVE playerMove) {}
 }
