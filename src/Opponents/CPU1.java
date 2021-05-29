@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class CPU1 implements Opponent {
 
-    // ------------------------------ VARIABLES ------------------------------ //
-
     // ------------------------------ CONSTRUCTORS ------------------------------ //
 
     public CPU1() {}
@@ -16,11 +14,9 @@ public class CPU1 implements Opponent {
 
     @Override
     public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList) {
-        return null;
+        return Driver.MOVE.values()[r.nextInt(3)];
     }
 
     @Override
-    public void processOutcome(Driver.MOVE oppMove) {
-
-    }
+    public void processOutcome(Driver.MOVE oppMove) {}
 }

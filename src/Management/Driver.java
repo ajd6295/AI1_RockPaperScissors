@@ -48,7 +48,7 @@ public class Driver {
         System.out.println(introMessage);
 
         CPU_TYPE opponentType = getCPUType();
-        System.out.println("Playing opponent " + opponentType.toString());
+        System.out.println("Playing opponent " + opponentType.toString() + "\n");
 
         Opponent opponent;
         if (opponentType == CPU_TYPE.CPU1) {

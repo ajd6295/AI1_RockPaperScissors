@@ -3,8 +3,13 @@ package Opponents;
 import Management.Driver;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public interface Opponent {
+
+    // ------------------------------ VARIABLES ------------------------------ //
+
+    Random r = new Random();
 
     // ------------------------------ METHODS ------------------------------ //
 
