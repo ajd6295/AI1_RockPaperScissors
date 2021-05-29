@@ -11,7 +11,7 @@ public class AI extends Opponent {
     // ------------------------------ CONSTRUCTORS ------------------------------ //
 
     public AI() {
-        this.filename = "AI.txt";
+        this.filename = "src\\Data\\AI.txt";
     }
 
     // ------------------------------ METHODS ------------------------------ //

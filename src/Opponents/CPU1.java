@@ -9,7 +9,7 @@ public class CPU1 extends Opponent {
     // ------------------------------ CONSTRUCTORS ------------------------------ //
 
     public CPU1() {
-        this.filename = "CPU1.txt";
+        this.filename = "src\\Data\\CPU1.txt";
     }
 
     // ------------------------------ METHODS ------------------------------ //
