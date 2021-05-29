@@ -18,6 +18,6 @@ public class CPU2 extends Opponent {
 
     @Override
     public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList) {
-        return null;
+        return Driver.losesAgainst(moveList.get(0));
     }
 }

@@ -51,6 +51,10 @@ public class Driver {
         System.out.print("Mode?\n1=Debug | 2=Cheat | 3=Normal\n> ");
         String input = in.nextLine();
         if (input.equals("") || !(input.charAt(0) == '2' | input.charAt(0) == '3')) {
+            if (!input.equals("")) {
+                if (willExit(input)) System.exit(1);
+            }
+
             MODE = 1;
             System.out.println("Proceeding in DEBUG mode\n");
         } else if (input.charAt(0) == '2') {
@@ -173,6 +177,18 @@ public class Driver {
             if (move2 == MOVE.ROCK) return OUTCOME.LOSE;
             else return OUTCOME.WIN;
         }
+    }
+
+    public static MOVE winsAgainst(MOVE move) {
+        if (move == MOVE.ROCK) return MOVE.SCISSORS;
+        if (move == MOVE.PAPER) return MOVE.ROCK;
+        return MOVE.PAPER;
+    }
+
+    public static MOVE losesAgainst(MOVE move) {
+        if (move == MOVE.ROCK) return MOVE.PAPER;
+        if (move == MOVE.PAPER) return MOVE.SCISSORS;
+        return MOVE.ROCK;
     }
 
 }

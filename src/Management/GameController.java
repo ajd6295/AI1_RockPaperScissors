@@ -44,7 +44,9 @@ public class GameController {
             if (input.equals("")) {
                 choice = -1;
                 break;
-            } else if (Driver.isNum(input)) {
+            } else if (Driver.willExit(input)) {
+                System.exit(1);
+            } else if (Driver.isNum(input)){
                 choice = Driver.toNum(input);
                 if (choice == 0) choice --;
                 break;
@@ -116,7 +118,7 @@ public class GameController {
             System.out.print("> ");
             String input = Driver.in.nextLine().toLowerCase();
             if (input.equals("")) continue;
-            Driver.willExit(input);
+            if (Driver.willExit(input)) System.exit(1);
 
             char choice = input.charAt(0);
             if (choice == 'r' || choice == '1') {
