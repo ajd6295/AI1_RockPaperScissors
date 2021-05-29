@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import Management.Driver.MOVE;
 import Management.Driver.OUTCOME;
+import static Management.Driver.in;
 
 public class AI extends Opponent {
 
@@ -26,7 +27,7 @@ public class AI extends Opponent {
 
     @Override
     public MOVE getMove(ArrayList<MOVE> moveList) {
-        return null;
+        return MOVE.ROCK;
     }
 
     @Override
@@ -64,21 +65,61 @@ public class AI extends Opponent {
         for (int i = 0; i < 5; i++) {
             fileContent += (data[i] + " | ");
         }
+        fileContent += "\n";
 
         // Formulate specific case to look for
         String thisCase = "";
         for (int i = 0; i < 3; i++) {
             MOVE move = moveList.get(i);
             if (move == MOVE.ROCK) {
-
+                thisCase += "R ";
+            } else if (move == MOVE.PAPER) {
+                thisCase += "P ";
+            } else if (move == MOVE.SCISSORS) {
+                thisCase += "S ";
+            } else {
+                thisCase += "N ";
             }
         }
 
         // Find line for this specific case & update
-        while (true) {
-            break;
-        }
+        String line;
+        while (reader.hasNextLine()) {
+            line = reader.nextLine();
+            if (line.contains(thisCase)) {
+                data = line.split(" \\| ");
+                fileContent += data[0] + " | ";
 
+                // Update 2nd chunk
+                float total = 0;
+                String[] chunk = data[1].split(" ");
+                if (outcome == OUTCOME.WIN) {
+                    chunk[0] = String.valueOf(Integer.parseInt(chunk[0]) + 1);
+                } else if (outcome == OUTCOME.TIE) {
+                    chunk[1] = String.valueOf(Integer.parseInt(chunk[1]) + 1);
+                } else {
+                    chunk[2] = String.valueOf(Integer.parseInt(chunk[2]) + 1);
+                }
+                for (int i = 0; i < 3; i++) {
+                    fileContent += chunk[i] + " ";
+                    total += Integer.parseInt(chunk[i]);
+                }
+
+                fileContent += "| ";
+
+                // Update 3rd chunk
+                for (int i = 0; i < 3; i++) {
+                    fileContent += (Float.parseFloat(chunk[i])/total) + " ";
+                }
+                fileContent += "\n";
+            } else {
+                fileContent += line + "\n";
+            }
+
+            if (line.contains("General")) {
+                break;
+            }
+        }
 
         // Write to file and close
         FileWriter writer = null;
