@@ -8,7 +8,7 @@ public class Driver {
 
     // ------------------------------ VARIABLES ------------------------------ //
 
-    public static boolean DEBUG;
+    public static int MODE;
     private final static String introMessage =
             "******************************\n" +
                     "    Rock Paper Scissors AI    \n" +
@@ -48,12 +48,17 @@ public class Driver {
 
         System.out.println(introMessage);
 
-        System.out.print("Debug?\n> ");
+        System.out.print("Mode?\n1=Debug | 2=Cheat | 3=Normal\n> ");
         String input = in.nextLine();
-        if (input.equals("")) {
-            DEBUG = false;
-        } else {
-            DEBUG = true;
+        if (input.equals("") || !(input.charAt(0) == '2' | input.charAt(0) == '3')) {
+            MODE = 1;
+            System.out.println("Proceeding in DEBUG mode\n");
+        } else if (input.charAt(0) == '2') {
+            MODE = 2;
+            System.out.println("Proceeding in CHEAT mode\n");
+        } else if (input.charAt(0) == '3') {
+            MODE = 3;
+            System.out.println("Proceeding in NORMAL mode\n");
         }
 
         CPU_TYPE opponentType = getCPUType();
