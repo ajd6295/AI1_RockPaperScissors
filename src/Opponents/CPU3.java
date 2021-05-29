@@ -2,6 +2,8 @@ package Opponents;
 
 import Management.Driver;
 
+import java.util.ArrayList;
+
 public class CPU3 implements Opponent {
 
     // ------------------------------ VARIABLES ------------------------------ //
@@ -13,7 +15,7 @@ public class CPU3 implements Opponent {
     // ------------------------------ METHODS ------------------------------ //
 
     @Override
-    public Driver.MOVE getMove() {
+    public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList) {
         return null;
     }
 

@@ -1,5 +1,7 @@
 package Management;
 
+import Opponents.*;
+
 import java.util.Scanner;
 
 public class Driver {
@@ -45,13 +47,22 @@ public class Driver {
 
         System.out.println(introMessage);
 
-        CPU_TYPE opponent = getCPUType();
-        System.out.println("Playing opponent " + opponent.toString());
+        CPU_TYPE opponentType = getCPUType();
+        System.out.println("Playing opponent " + opponentType.toString());
+
+        Opponent opponent;
+        if (opponentType == CPU_TYPE.CPU1) {
+            opponent = new CPU1();
+        } else if (opponentType == CPU_TYPE.CPU2) {
+            opponent = new CPU2();
+        } else if (opponentType == CPU_TYPE.CPU3) {
+            opponent = new CPU3();
+        } else {
+            opponent = new AI();
+        }
 
         GameController controller = new GameController(opponent);
-
-        // Make instance of opponent and GameController
-        // Pass control to GameController
+        controller.startGame();
     }
 
     /**
