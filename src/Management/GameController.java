@@ -50,8 +50,12 @@ public class GameController {
                 break;
             }
         }
-        System.out.println("Playing first to " + choice + " (Best of " + ((choice*2)-1) + ")!\n");
 
+        if (choice < 1) {
+            System.out.println("Playing indefinitely!\n");
+        } else {
+            System.out.println("Playing first to " + choice + " (Best of " + ((choice*2)-1) + ")!\n");
+        }
 
         System.out.println(roundSeparator);
 
@@ -105,10 +109,11 @@ public class GameController {
     }
 
     private Driver.MOVE getChoice() {
+        System.out.print("Rock, Paper, Scissors, Shoot!");
         while (true) {
-            System.out.print("Rock, Paper, Scissors, Shoot!\n> ");
-
+            System.out.print("> ");
             String input = Driver.in.nextLine().toLowerCase();
+            if (input.equals("")) continue;
             Driver.willExit(input);
 
             char choice = input.charAt(0);

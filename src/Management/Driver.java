@@ -81,6 +81,7 @@ public class Driver {
         while (true) {
             System.out.print("> ");
             input = in.nextLine();
+            if (input.equals("")) continue;
 
             if (willExit(input)) {
                 System.exit(1);
@@ -105,7 +106,6 @@ public class Driver {
      * @return          Boolean denoting if they want to exit game
      */
     public static boolean willExit(String input) {
-        if (input.equals("")) return false;
         return (input.toLowerCase().charAt(0) == 'e' || input.toLowerCase().charAt(0) == 'q');
     }
 

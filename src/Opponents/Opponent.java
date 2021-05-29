@@ -49,10 +49,6 @@ public abstract class Opponent {
 
         // Get each individual datapoint
         String[] data = reader.nextLine().split(" \\| ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(data[i] + " ");
-        }
-        System.out.println("");
 
         // Update outcome-specific information
         Driver.OUTCOME outcome = Driver.outcome(CPUMove, playerMove);
