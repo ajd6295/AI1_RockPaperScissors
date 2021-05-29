@@ -10,7 +10,9 @@ public class CPU3 extends Opponent {
 
     // ------------------------------ CONSTRUCTORS ------------------------------ //
 
-    public CPU3() {}
+    public CPU3() {
+        this.filename = "CPU3.txt";
+    }
 
     // ------------------------------ METHODS ------------------------------ //
 

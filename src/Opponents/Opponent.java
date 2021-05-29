@@ -10,6 +10,7 @@ public abstract class Opponent {
     // ------------------------------ VARIABLES ------------------------------ //
 
     Random r = new Random();
+    String filename;
 
     // ------------------------------ METHODS ------------------------------ //
 

@@ -10,7 +10,9 @@ public class AI extends Opponent {
 
     // ------------------------------ CONSTRUCTORS ------------------------------ //
 
-    public AI() {}
+    public AI() {
+        this.filename = "AI.txt";
+    }
 
     // ------------------------------ METHODS ------------------------------ //
 
