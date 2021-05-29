@@ -21,6 +21,8 @@ public class Driver {
         CPU1,
         CPU2,
         CPU3,
+        CPU4,
+        CPU5,
         AI
     }
 
@@ -75,6 +77,10 @@ public class Driver {
             opponent = new CPU2();
         } else if (opponentType == CPU_TYPE.CPU3) {
             opponent = new CPU3();
+        } else if (opponentType == CPU_TYPE.CPU4) {
+            opponent = new CPU4();
+        } else if (opponentType == CPU_TYPE.CPU5) {
+            opponent = new CPU5();
         } else {
             opponent = new AI();
         }
@@ -91,9 +97,11 @@ public class Driver {
     public static CPU_TYPE getCPUType() {
         System.out.println("Which CPU do you want to play against?");
         System.out.println("    1) CPU1 (Random)");
-        System.out.println("    2) CPU2 (Plays winning move to your previous choice)");
-        System.out.println("    3) CPU3 (Randomly chooses different behavioral patterns)");
-        System.out.println("    4) AI (AI that learns with every game)");
+        System.out.println("    2) CPU2 (Plays what would win against your previous move)");
+        System.out.println("    3) CPU3 (Plays what would lose against your previous move)");
+        System.out.println("    4) CPU4 (Plays what would tie against your previous move)");
+        System.out.println("    5) CPU5 (Randomly chooses different behavioral patterns)");
+        System.out.println("    6) AI (AI that learns with every game)");
 
         String input;
         while (true) {
@@ -107,7 +115,7 @@ public class Driver {
                 int choice;
                 if (isNum(input)) {
                     choice = toNum(input);
-                    if (0 < choice && choice < 5) {
+                    if (0 < choice && choice < 7) {
                         return CPU_TYPE.values()[choice-1];
                     } else {
                         System.out.println("Please choose a number between 1 and 4 (inclusive)");
@@ -167,16 +175,8 @@ public class Driver {
             return OUTCOME.TIE;
         }
 
-        if (move1 == MOVE.ROCK) {
-            if (move2 == MOVE.PAPER) return OUTCOME.LOSE;
-            else return OUTCOME.WIN;
-        } else if (move1 == MOVE.PAPER) {
-            if (move2 == MOVE.SCISSORS) return OUTCOME.LOSE;
-            else return OUTCOME.WIN;
-        } else {
-            if (move2 == MOVE.ROCK) return OUTCOME.LOSE;
-            else return OUTCOME.WIN;
-        }
+        if (winsAgainst(move1) == move2) return OUTCOME.WIN;
+        return OUTCOME.LOSE;
     }
 
     public static MOVE winsAgainst(MOVE move) {

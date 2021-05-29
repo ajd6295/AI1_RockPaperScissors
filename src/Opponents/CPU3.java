@@ -18,6 +18,7 @@ public class CPU3 extends Opponent {
 
     @Override
     public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList) {
-        return null;
+        if (moveList.get(0) == Driver.MOVE.NONE) return Driver.MOVE.values()[r.nextInt(3)];
+        return Driver.winsAgainst(moveList.get(0));
     }
 }
