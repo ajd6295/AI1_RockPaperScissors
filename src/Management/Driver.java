@@ -75,7 +75,7 @@ public class Driver {
         System.out.println("    1) CPU1 (Random)");
         System.out.println("    2) CPU2 (Plays winning move to your previous choice)");
         System.out.println("    3) CPU3 (Randomly chooses different behavioral patterns)");
-        System.out.println("    4) AI (AI that learns with every game)\n");
+        System.out.println("    4) AI (AI that learns with every game)");
 
         String input;
         while (true) {

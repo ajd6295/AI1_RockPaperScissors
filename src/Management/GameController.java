@@ -10,10 +10,9 @@ public class GameController {
     // ------------------------------ VARIABLES ------------------------------ //
 
     private Opponent opponent;
-
-    private ArrayList<Driver.MOVE> moveList = new ArrayList<>(
-            Arrays.asList(Driver.MOVE.NONE, Driver.MOVE.NONE, Driver.MOVE.NONE)
-    );
+    private ArrayList<Driver.MOVE> moveList;
+    private int oppWins;
+    private int playerWins;
 
     private final String roundSeparator =
             "===\n" +
@@ -26,16 +25,45 @@ public class GameController {
 
     public GameController(Opponent opponent) {
         this.opponent = opponent;
+        this.moveList = new ArrayList<>(
+                Arrays.asList(Driver.MOVE.NONE, Driver.MOVE.NONE, Driver.MOVE.NONE)
+        );
+        this.oppWins = 0;
+        this.playerWins = 0;
     }
 
     // ------------------------------ METHODS ------------------------------ //
 
     public void startGame() {
 
+        System.out.println("First to? (<1 goes forever)");
+        int choice;
+        while (true) {
+            System.out.print("> ");
+            String input = Driver.in.nextLine();
+            if (Driver.isNum(input)) {
+                choice = Driver.toNum(input);
+                if (choice == 0) choice --;
+                break;
+            }
+        }
+        System.out.println("Playing first to " + choice + " (Best of " + ((choice*2)-1) + ")!\n");
+
+
         System.out.println(roundSeparator);
 
         while (true){
             doRound();
+            if (oppWins == choice) {
+                System.out.println("You lost the game :(");
+            } else if (playerWins == choice) {
+                System.out.println("You won the game!");
+            } else {
+                continue;
+            }
+
+            System.out.println("You: " + playerWins + " | CPU: " + oppWins);
+            System.exit(0);
         }
 
     }
@@ -60,6 +88,11 @@ public class GameController {
                 System.out.println("You tied!");
                 System.out.println(tieSeperator);
             } else {
+                if (outcome == Driver.OUTCOME.WIN) {
+                    playerWins++;
+                } else {
+                    oppWins++;
+                }
                 System.out.println("You " + outcome.toString() + "!");
                 break;
             }
