@@ -22,7 +22,7 @@ public class AI extends Opponent {
     }
 
     @Override
-    public void processOutcome(Driver.MOVE playerMove) {
+    public void processOutcome(Driver.MOVE CPUMove, Driver.MOVE playerMove) {
 
     }
 }

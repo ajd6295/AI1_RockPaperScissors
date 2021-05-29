@@ -81,6 +81,7 @@ public class GameController {
 
             moveList.remove(2);
             moveList.add(0, playerMove);
+            opponent.processOutcome(oppMove, playerMove);
 
             Driver.OUTCOME outcome = Driver.outcome(playerMove, oppMove);
 
