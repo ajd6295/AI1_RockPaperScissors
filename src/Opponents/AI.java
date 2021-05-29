@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Management.Driver.MOVE;
@@ -31,7 +32,11 @@ public class AI extends Opponent {
     }
 
     @Override
-    public void processOutcome(MOVE CPUMove, MOVE playerMove, ArrayList<MOVE> moveList) {
+    public void processOutcome(MOVE CPUMove, MOVE playerMove, ArrayList<MOVE> origMoveList) {
+
+        List<MOVE> moveList =  origMoveList.subList(1,4);
+
+        // TODO: clean up so there's less duplicated code
 
         OUTCOME outcome = Driver.outcome(CPUMove, playerMove);
         String fileContent = "";
@@ -68,17 +73,17 @@ public class AI extends Opponent {
         fileContent += "\n";
 
         // Formulate specific case to look for
-        String thisCase = "";
+        String specificCase = "";
         for (int i = 0; i < 3; i++) {
             MOVE move = moveList.get(i);
             if (move == MOVE.ROCK) {
-                thisCase += "R ";
+                specificCase += "R ";
             } else if (move == MOVE.PAPER) {
-                thisCase += "P ";
+                specificCase += "P ";
             } else if (move == MOVE.SCISSORS) {
-                thisCase += "S ";
+                specificCase += "S ";
             } else {
-                thisCase += "N ";
+                specificCase += "N ";
             }
         }
 
@@ -86,16 +91,16 @@ public class AI extends Opponent {
         String line;
         while (reader.hasNextLine()) {
             line = reader.nextLine();
-            if (line.contains(thisCase)) {
+            if (line.contains(specificCase)) {
                 data = line.split(" \\| ");
                 fileContent += data[0] + " | ";
 
-                // Update 2nd chunk
+                // Update 2nd chunk [what we *should* have played]
                 float total = 0;
                 String[] chunk = data[1].split(" ");
-                if (outcome == OUTCOME.WIN) {
+                if (Driver.losesAgainst(playerMove) == MOVE.ROCK) {
                     chunk[0] = String.valueOf(Integer.parseInt(chunk[0]) + 1);
-                } else if (outcome == OUTCOME.TIE) {
+                } else if (Driver.losesAgainst(playerMove) == MOVE.PAPER) {
                     chunk[1] = String.valueOf(Integer.parseInt(chunk[1]) + 1);
                 } else {
                     chunk[2] = String.valueOf(Integer.parseInt(chunk[2]) + 1);
@@ -112,6 +117,67 @@ public class AI extends Opponent {
                     fileContent += (Float.parseFloat(chunk[i])/total) + " ";
                 }
                 fileContent += "\n";
+            } else {
+                fileContent += line + "\n";
+            }
+
+            if (line.contains("General")) {
+                break;
+            }
+        }
+
+        // Formulate general case to look for
+        String generalCase = "1 ";
+        if (moveList.get(1) == MOVE.NONE) {
+            generalCase += "N ";
+        } else if (moveList.get(1) == moveList.get(0)) {
+            generalCase += "1 ";
+        } else {
+            generalCase += "2 ";
+        }
+        if (moveList.get(2) == MOVE.NONE) {
+            generalCase += "N ";
+        } else if (moveList.get(2) == moveList.get(0)) {
+            generalCase += "1 ";
+        } else if (moveList.get(2) == moveList.get(1)){
+            generalCase += "2 ";
+        } else {
+            generalCase += "3 ";
+        }
+
+        // Find line for this general case & update
+        while (reader.hasNextLine()) {
+            line = reader.nextLine();
+            if (!(moveList.get(0) == MOVE.NONE)) {
+                if (line.contains(generalCase)) {
+                    data = line.split(" \\| ");
+                    fileContent += data[0] + " | ";
+
+                    // Update 3rd chunk
+                    float total = 0;
+                    String[] chunk = data[1].split(" ");
+                    if (Driver.losesAgainst(playerMove) == MOVE.ROCK) {
+                        chunk[0] = String.valueOf(Integer.parseInt(chunk[0]) + 1);
+                    } else if (Driver.losesAgainst(playerMove) == MOVE.PAPER) {
+                        chunk[1] = String.valueOf(Integer.parseInt(chunk[1]) + 1);
+                    } else {
+                        chunk[2] = String.valueOf(Integer.parseInt(chunk[2]) + 1);
+                    }
+
+                    for (int i = 0; i < 3; i++) {
+                        fileContent += chunk[i] + " ";
+                        total += Integer.parseInt(chunk[i]);
+                    }
+
+                    fileContent += "| ";
+                    // Update 3rd chunk
+                    for (int i = 0; i < 3; i++) {
+                        fileContent += (Float.parseFloat(chunk[i])/total) + " ";
+                    }
+                    fileContent += "\n";
+                } else {
+                    fileContent += line + "\n";
+                }
             } else {
                 fileContent += line + "\n";
             }

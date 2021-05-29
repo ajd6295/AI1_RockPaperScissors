@@ -31,7 +31,7 @@ public class GameController {
     public GameController(Opponent opponent) {
         this.opponent = opponent;
         this.moveList = new ArrayList<>(
-                Arrays.asList(MOVE.NONE, MOVE.NONE, MOVE.NONE)
+                Arrays.asList(MOVE.NONE, MOVE.NONE, MOVE.NONE, MOVE.NONE)
         );
         this.oppWins = 0;
         this.playerWins = 0;
@@ -91,7 +91,7 @@ public class GameController {
             System.out.println("Opponent played: " + oppMove.toString());
             System.out.println("You played: " + playerMove.toString());
 
-            moveList.remove(2);
+            moveList.remove(3);
             moveList.add(0, playerMove);
 
             if (MODE != 1) {
