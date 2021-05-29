@@ -31,7 +31,9 @@ public class GameController {
     // ------------------------------ METHODS ------------------------------ //
 
     public void startGame() {
+
         System.out.println(roundSeparator);
+
         while (true){
             doRound();
         }
@@ -48,6 +50,9 @@ public class GameController {
 
             System.out.println("Opponent played: " + oppMove.toString());
             System.out.println("You played: " + playerMove.toString());
+
+            moveList.remove(2);
+            moveList.add(0, playerMove);
 
             Driver.OUTCOME outcome = Driver.outcome(playerMove, oppMove);
 
