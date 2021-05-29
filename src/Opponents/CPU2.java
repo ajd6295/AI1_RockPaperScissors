@@ -4,7 +4,7 @@ import Management.Driver;
 
 import java.util.ArrayList;
 
-public class CPU2 implements Opponent {
+public class CPU2 extends Opponent {
 
     // ------------------------------ VARIABLES ------------------------------ //
 

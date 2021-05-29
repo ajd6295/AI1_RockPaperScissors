@@ -4,7 +4,7 @@ import Management.Driver;
 
 import java.util.ArrayList;
 
-public class AI implements Opponent {
+public class AI extends Opponent {
 
     // ------------------------------ VARIABLES ------------------------------ //
 

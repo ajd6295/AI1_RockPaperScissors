@@ -5,7 +5,7 @@ import Management.Driver;
 import java.util.ArrayList;
 import java.util.Random;
 
-public interface Opponent {
+public abstract class Opponent {
 
     // ------------------------------ VARIABLES ------------------------------ //
 
@@ -19,13 +19,13 @@ public interface Opponent {
      * @param moveList  List of latest three moves
      * @return          This opponent's move
      */
-    public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList);
+    abstract public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList);
 
     /**
      * processOutcome: Implementation dependent processing of outcome of round
      *
      * @param playerMove       The move that the opponent (human) made
      */
-    public void processOutcome(Driver.MOVE playerMove);
+    abstract public void processOutcome(Driver.MOVE playerMove);
 
 }
