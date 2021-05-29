@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Driver {
 
+    // ------------------------------ VARIABLES ------------------------------ //
+
     private final static String introMessage =
             "******************************\n" +
                     "    Rock Paper Scissors AI    \n" +
@@ -32,6 +34,13 @@ public class Driver {
         LOSE
     }
 
+    // ------------------------------ METHODS ------------------------------ //
+
+    /**
+     * main: Greet user, get the opponent they want to play, and start game
+     *
+     * @param args  none
+     */
     public static void main(String[] args) {
 
         System.out.println(introMessage);
@@ -45,6 +54,11 @@ public class Driver {
         // Pass control to GameController
     }
 
+    /**
+     * getCPUType: Get what opponent the user wants to play against
+     *
+     * @return  CPU_TYPE of desired opponent
+     */
     public static CPU_TYPE getCPUType() {
         System.out.println("Which CPU do you want to play against?");
         System.out.println("    1) CPU1 (Random)");
@@ -73,10 +87,23 @@ public class Driver {
         }
     }
 
+    /**
+     * willExit: Determine if user wants to exit game
+     *
+     * @param input     User's input
+     * @return          Boolean denoting if they want to exit game
+     */
     public static boolean willExit(String input) {
         return (input.toLowerCase().charAt(0) == 'e' || input.toLowerCase().charAt(0) == 'q');
     }
 
+    /**
+     * isNum: Determines if the input is a number. If not,
+     *        prints out an error message
+     *
+     * @param input     User's input
+     * @return          Boolean denoting if it's a number or not
+     */
     public static boolean isNum(String input) {
         try {
             Integer.parseInt(input);
@@ -87,10 +114,24 @@ public class Driver {
         }
     }
 
+    /**
+     * toNum: Returns integer form of string
+     *
+     * @param input     String to change to Integer
+     * @return          Integer form of String
+     */
     public static int toNum(String input) {
         return Integer.parseInt(input);
     }
 
+    /**
+     * outcome: Returns the outcome of the round
+     *          (from the perspective of player who made move1)
+     *
+     * @param move1     First move to consider
+     * @param move2     Second move to consider
+     * @return          Outcome of round
+     */
     public static OUTCOME outcome(MOVE move1, MOVE move2) {
         if (move1 == move2) {
             return OUTCOME.TIE;
