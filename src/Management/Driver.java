@@ -105,6 +105,7 @@ public class Driver {
      * @return          Boolean denoting if they want to exit game
      */
     public static boolean willExit(String input) {
+        if (input.equals("")) return false;
         return (input.toLowerCase().charAt(0) == 'e' || input.toLowerCase().charAt(0) == 'q');
     }
 

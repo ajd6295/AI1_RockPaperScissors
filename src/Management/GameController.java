@@ -41,7 +41,10 @@ public class GameController {
         while (true) {
             System.out.print("> ");
             String input = Driver.in.nextLine();
-            if (Driver.isNum(input)) {
+            if (input.equals("")) {
+                choice = -1;
+                break;
+            } else if (Driver.isNum(input)) {
                 choice = Driver.toNum(input);
                 if (choice == 0) choice --;
                 break;
@@ -72,7 +75,7 @@ public class GameController {
         while (true) {
             Driver.MOVE oppMove = opponent.getMove(moveList);
             //
-            // System.out.println("Opponent will play: " + oppMove.toString());
+            System.out.println("Opponent will play: " + oppMove.toString());
             //
             Driver.MOVE playerMove = getChoice();
 

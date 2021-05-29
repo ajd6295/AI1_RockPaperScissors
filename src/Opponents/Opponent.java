@@ -1,6 +1,7 @@
 package Opponents;
 
 import Management.Driver;
+import com.sun.security.jgss.GSSUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,13 +48,17 @@ public abstract class Opponent {
         assert reader != null;
 
         // Get each individual datapoint
-        String[] data = reader.nextLine().split(" | ");
+        String[] data = reader.nextLine().split(" \\| ");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(data[i] + " ");
+        }
+        System.out.println("");
 
         // Update outcome-specific information
         Driver.OUTCOME outcome = Driver.outcome(CPUMove, playerMove);
         if (outcome == Driver.OUTCOME.WIN) {
             data[0] = String.valueOf(Integer.parseInt(data[0]) + 1);
-        } else if (outcome == Driver.OUTCOME.WIN) {
+        } else if (outcome == Driver.OUTCOME.TIE) {
             data[1] = String.valueOf(Integer.parseInt(data[1]) + 1);
         } else {
             data[2] = String.valueOf(Integer.parseInt(data[2]) + 1);
@@ -61,7 +66,7 @@ public abstract class Opponent {
 
         // Update outcome-independent information
         data[3] = String.valueOf(Integer.parseInt(data[3]) + 1);
-        data[4] = Integer.parseInt(data[0]) / Integer.parseInt(data[3]) + "%";
+        data[4] = (Float.parseFloat(data[0]) / Float.parseFloat(data[3]))*100 + "%";
 
         String fileContent = "";
         for (int i = 0; i < 5; i++) {
