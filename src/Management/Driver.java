@@ -19,6 +19,19 @@ public class Driver {
         AI
     }
 
+    public enum MOVE {
+        ROCK,
+        PAPER,
+        SCISSORS,
+        NONE
+    }
+
+    public enum OUTCOME {
+        WIN,
+        TIE,
+        LOSE
+    }
+
     public static void main(String[] args) {
 
         System.out.println(introMessage);
@@ -76,6 +89,23 @@ public class Driver {
 
     public static int toNum(String input) {
         return Integer.parseInt(input);
+    }
+
+    public static OUTCOME outcome(MOVE move1, MOVE move2) {
+        if (move1 == move2) {
+            return OUTCOME.TIE;
+        }
+
+        if (move1 == MOVE.ROCK) {
+            if (move2 == MOVE.PAPER) return OUTCOME.LOSE;
+            else return OUTCOME.WIN;
+        } else if (move1 == MOVE.PAPER) {
+            if (move2 == MOVE.SCISSORS) return OUTCOME.LOSE;
+            else return OUTCOME.WIN;
+        } else {
+            if (move2 == MOVE.ROCK) return OUTCOME.LOSE;
+            else return OUTCOME.WIN;
+        }
     }
 
 }
