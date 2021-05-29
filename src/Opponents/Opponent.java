@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Management.Driver.MOVE;
+import Management.Driver.OUTCOME;
+
 public abstract class Opponent {
 
     // ------------------------------ VARIABLES ------------------------------ //
@@ -26,7 +29,7 @@ public abstract class Opponent {
      * @param moveList  List of latest three moves
      * @return          This opponent's move
      */
-    abstract public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList);
+    abstract public MOVE getMove(ArrayList<MOVE> moveList);
 
     /**
      * processOutcome: Implementation dependent processing of outcome of round
@@ -35,7 +38,7 @@ public abstract class Opponent {
      * @param CPUMove       The move that the CPU made
      * @param playerMove       The move that the opponent (human) made
      */
-    public void processOutcome(Driver.MOVE CPUMove, Driver.MOVE playerMove) {
+    public void processOutcome(MOVE CPUMove, MOVE playerMove, ArrayList<MOVE> moveList) {
 
         // Open file
         File file = new File(filename);
@@ -51,10 +54,10 @@ public abstract class Opponent {
         String[] data = reader.nextLine().split(" \\| ");
 
         // Update outcome-specific information
-        Driver.OUTCOME outcome = Driver.outcome(CPUMove, playerMove);
-        if (outcome == Driver.OUTCOME.WIN) {
+        OUTCOME outcome = Driver.outcome(CPUMove, playerMove);
+        if (outcome == OUTCOME.WIN) {
             data[0] = String.valueOf(Integer.parseInt(data[0]) + 1);
-        } else if (outcome == Driver.OUTCOME.TIE) {
+        } else if (outcome == OUTCOME.TIE) {
             data[1] = String.valueOf(Integer.parseInt(data[1]) + 1);
         } else {
             data[2] = String.valueOf(Integer.parseInt(data[2]) + 1);
@@ -69,6 +72,7 @@ public abstract class Opponent {
             fileContent += (data[i] + " | ");
         }
 
+        // Write to file and close
         FileWriter writer = null;
         try {
             writer = new FileWriter(filename);

@@ -5,12 +5,17 @@ import Opponents.Opponent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Management.Driver.MOVE;
+import Management.Driver.OUTCOME;
+import static Management.Driver.MODE;
+import static Management.Driver.in;
+
 public class GameController {
 
     // ------------------------------ VARIABLES ------------------------------ //
 
     private Opponent opponent;
-    private ArrayList<Driver.MOVE> moveList;
+    private ArrayList<MOVE> moveList;
     private int oppWins;
     private int playerWins;
 
@@ -26,7 +31,7 @@ public class GameController {
     public GameController(Opponent opponent) {
         this.opponent = opponent;
         this.moveList = new ArrayList<>(
-                Arrays.asList(Driver.MOVE.NONE, Driver.MOVE.NONE, Driver.MOVE.NONE)
+                Arrays.asList(MOVE.NONE, MOVE.NONE, MOVE.NONE)
         );
         this.oppWins = 0;
         this.playerWins = 0;
@@ -40,7 +45,7 @@ public class GameController {
         int choice;
         while (true) {
             System.out.print("> ");
-            String input = Driver.in.nextLine();
+            String input = in.nextLine();
             if (input.equals("")) {
                 choice = -1;
                 break;
@@ -79,9 +84,9 @@ public class GameController {
 
     private void doRound() {
         while (true) {
-            Driver.MOVE oppMove = opponent.getMove(moveList);
-            if (Driver.MODE != 3) System.out.println("Opponent will play: " + oppMove.toString());
-            Driver.MOVE playerMove = getChoice();
+            MOVE oppMove = opponent.getMove(moveList);
+            if (MODE != 3) System.out.println("Opponent will play: " + oppMove.toString());
+            MOVE playerMove = getChoice();
 
             System.out.println("Opponent played: " + oppMove.toString());
             System.out.println("You played: " + playerMove.toString());
@@ -89,18 +94,18 @@ public class GameController {
             moveList.remove(2);
             moveList.add(0, playerMove);
 
-            if (Driver.MODE != 1) {
-                opponent.processOutcome(oppMove, playerMove);
+            if (MODE != 1) {
+                opponent.processOutcome(oppMove, playerMove, moveList);
             }
 
 
-            Driver.OUTCOME outcome = Driver.outcome(playerMove, oppMove);
+            OUTCOME outcome = Driver.outcome(playerMove, oppMove);
 
-            if (outcome == Driver.OUTCOME.TIE) {
+            if (outcome == OUTCOME.TIE) {
                 System.out.println("You tied!");
                 System.out.println(tieSeperator);
             } else {
-                if (outcome == Driver.OUTCOME.WIN) {
+                if (outcome == OUTCOME.WIN) {
                     playerWins++;
                 } else {
                     oppWins++;
@@ -112,21 +117,21 @@ public class GameController {
         System.out.println("\n" + roundSeparator);
     }
 
-    private Driver.MOVE getChoice() {
+    private MOVE getChoice() {
         System.out.print("Rock, Paper, Scissors, Shoot!");
         while (true) {
             System.out.print("> ");
-            String input = Driver.in.nextLine().toLowerCase();
+            String input = in.nextLine().toLowerCase();
             if (input.equals("")) continue;
             if (Driver.willExit(input)) System.exit(1);
 
             char choice = input.charAt(0);
             if (choice == 'r' || choice == '1') {
-                return Driver.MOVE.ROCK;
+                return MOVE.ROCK;
             } else if (choice == 'p' || choice == '2') {
-                return Driver.MOVE.PAPER;
+                return MOVE.PAPER;
             } else if (choice == 's' || choice == '3') {
-                return Driver.MOVE.SCISSORS;
+                return MOVE.SCISSORS;
             }
 
             System.out.println("Please enter rock/r/1, paper/p/2, or scissors/s/3");
