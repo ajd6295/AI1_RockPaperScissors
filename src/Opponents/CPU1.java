@@ -18,7 +18,4 @@ public class CPU1 extends Opponent {
     public Driver.MOVE getMove(ArrayList<Driver.MOVE> moveList) {
         return Driver.MOVE.values()[r.nextInt(3)];
     }
-
-    @Override
-    public void processOutcome(Driver.MOVE playerMove) {}
 }

@@ -27,6 +27,8 @@ public abstract class Opponent {
      *
      * @param playerMove       The move that the opponent (human) made
      */
-    abstract public void processOutcome(Driver.MOVE playerMove);
+    public void processOutcome(Driver.MOVE playerMove) {
+
+    }
 
 }
