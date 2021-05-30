@@ -2,6 +2,7 @@ package Management;
 
 import Opponents.*;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Driver {
@@ -52,14 +53,13 @@ public class Driver {
 
         System.out.print("Mode?\n1=Debug | 2=Cheat | 3=Normal\n> ");
         String input = in.nextLine();
-        if (input.equals("") || !(input.charAt(0) == '2' | input.charAt(0) == '3')) {
-            if (!input.equals("")) {
-                if (willExit(input)) System.exit(1);
-            }
-
+        if (!input.equals("")) {
+            if (willExit(input)) System.exit(1);
+        }
+        if (!input.equals("") && (!(input.charAt(0) == '2' | input.charAt(0) == '3'))) {
             MODE = 1;
             System.out.println("Proceeding in DEBUG mode\n");
-        } else if (input.charAt(0) == '2') {
+        } else if (input.equals("") || input.charAt(0) == '2') {
             MODE = 2;
             System.out.println("Proceeding in CHEAT mode\n");
         } else if (input.charAt(0) == '3') {
@@ -102,12 +102,13 @@ public class Driver {
         System.out.println("    4) CPU4 (Plays what would tie against your previous move)");
         System.out.println("    5) CPU5 (Randomly chooses different behavioral patterns)");
         System.out.println("    6) AI (AI that learns with every game)");
+        System.out.println("    7) Random choice");
 
         String input;
         while (true) {
             System.out.print("> ");
             input = in.nextLine();
-            if (input.equals("")) continue;
+            if (input.equals("")) return CPU_TYPE.AI;
 
             if (willExit(input)) {
                 System.exit(1);
@@ -115,7 +116,11 @@ public class Driver {
                 int choice;
                 if (isNum(input)) {
                     choice = toNum(input);
-                    if (0 < choice && choice < 7) {
+                    if (0 < choice && choice < 8) {
+                        if (choice == 7) {
+                            Random r = new Random();
+                            return CPU_TYPE.values()[r.nextInt(6)];
+                        }
                         return CPU_TYPE.values()[choice-1];
                     } else {
                         System.out.println("Please choose a number between 1 and 4 (inclusive)");

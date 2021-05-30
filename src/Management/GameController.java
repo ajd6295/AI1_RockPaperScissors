@@ -47,7 +47,7 @@ public class GameController {
             System.out.print("> ");
             String input = in.nextLine();
             if (input.equals("")) {
-                choice = -1;
+                choice = 2;
                 break;
             } else if (Driver.willExit(input)) {
                 System.exit(1);
